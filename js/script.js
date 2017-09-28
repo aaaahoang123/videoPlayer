@@ -32,33 +32,59 @@ function isValidVideoID() {
 	return isValid;
 }
 
-/* API YouTube to validate the ID*/
+/* API YouTube to validate the ID after local validate*/
 function checkIdWithYouTube() {
+    var validVideoId = isValidVideoID();
     var videoId = $("#videoId").val();
+	var apiYT;
+	if (validVideoId === true) {
+        apiYT = 'https://www.googleapis.com/youtube/v3/videos?part=contentDetails&id='+ videoId + '&key=AIzaSyBStdhzhkK8ne1tqsUz4A8j9axNi0NqE_M';
+	}
+	else {
+		apiYT = 'https://www.googleapis.com/youtube/v3/video';
+	}
+	$.ajax (
+		{
+			url: apiYT,
+			type: 'GET',
+			success: function (data) {
 
-
-
-    $.get ("https://www.googleapis.com/youtube/v3/videos", {
+                if (data.pageInfo.totalResults != 0) {
+                    document.getElementById("alertVideoID").innerHTML = '<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok-circle"></span><strong>   ID video được xác thực</strong></div>';
+                    document.getElementById("checkRequest").value = "Xác Thực";
+                    document.getElementById("checkRequest").className = "btn btn-success";
+                    document.getElementById("videoId").setAttributeNode(document.createAttribute("disabled"));
+                }
+                else {
+                    document.getElementById("alertVideoID").innerHTML = '<div class="alert alert-danger text-center"><span class="glyphicon glyphicon-minus-sign"></span><strong>   ID video của bạn không tồn tại</strong></div>';
+                    console.log("YouTube ID doesn't exist");
+                }
+                },
+			error: function () {
+				console.log('Video ID isn\'t validated');
+            }
+		}
+	);
+	/*
+	$.get ("https://www.googleapis.com/youtube/v3/videos", {
             part: "contentDetails",
             id: videoId,
             key: "AIzaSyBStdhzhkK8ne1tqsUz4A8j9axNi0NqE_M"
-        }, /*get the data from Google API*/
+        }, /*get the data from Google API*
 
         function (data) {
-            console.log(data);
-        	if (data.pageInfo.totalResults != 0) {
-				document.getElementById("alertVideoID").innerHTML = '<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok-circle"></span><strong>   ID video được xác thực</strong></div>';
+            if (data.pageInfo.totalResults != 0) {
+                document.getElementById("alertVideoID").innerHTML = '<div class="alert alert-success text-center"><span class="glyphicon glyphicon-ok-circle"></span><strong>   ID video được xác thực</strong></div>';
                 document.getElementById("checkRequest").value = "Xác Thực";
                 document.getElementById("checkRequest").className = "btn btn-success";
                 document.getElementById("videoId").setAttributeNode(document.createAttribute("disabled"));
-        	}
-			else {
+            }
+            else {
                 document.getElementById("alertVideoID").innerHTML = '<div class="alert alert-danger text-center"><span class="glyphicon glyphicon-minus-sign"></span><strong>   ID video của bạn không tồn tại</strong></div>';
-
-        	}
+                console.log("YouTube ID doesn't exist");
+            }
         }
-    );
-
+    ); */
 }
 
 
@@ -177,19 +203,16 @@ function postAjax() {
 /*Validate and Post the Form*/
 
 function handleForm() {
-		
+
 		var isValid = isValidForm();
 
 		if (isValid === true)
 		{
 			postAjax();
-
 		}
-	return isValid;			
 }
 
-
-
+/*Get the video fom API*/
 
 function getAjax() {
 	$.ajax(
@@ -247,16 +270,16 @@ function deleteAjax(id) {
 		type: 'DELETE',
 		success: function() {
 			$("#alertModal").modal();
-			document.getElementById("alert").innerHTML = '<div class="alert alert-success"><strong>Thành Công!</strong> Đã xóa Video</div>';
+			document.getElementById("alertModalBody").innerHTML = '<div class="alert alert-success"><strong>Thành Công!</strong> Đã xóa Video</div>';
 		},
 		error: function() {
 			$("#alertModal").modal();
-			document.getElementById("alert").innerHTML = '<div class="alert alert-danger"><strong>Thất Bại!</strong> Video chưa được xóa</div>';
+			document.getElementById("alertModalBody").innerHTML = '<div class="alert alert-danger"><strong>Thất Bại!</strong> Video chưa được xóa</div>';
 		}
 	})
 }
 
-
+/*Play the video*/
 function play(id,name) {
 	var link = "https://www.youtube.com/embed/" + id + "?autoplay=1";
 	
