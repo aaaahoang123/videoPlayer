@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video player Assignment</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+
+<nav class="navbar navbar-default bg-faded navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">MyTube</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="home.html"><span class="glyphicon glyphicon-home"></span> Trang Chủ <span class="sr-only">(current)</span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chức Năng <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="uploadForm.html"><span class="glyphicon glyphicon-cloud-upload"></span>    Tải Lên</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cloud-download"></span>   Tải Xuống</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm Kiếm">
+                        <span class="input-group-btn"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button></span>
+                    </div>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li class="active"><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Đăng Ký</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-log-in"></span> Đăng Nhập <span class="caret"></span></a>
+
+                    <!--Login Form-->
+                    <ul class="dropdown-menu" id="loginForm">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <form class="form" role="form" action="login" accept-charset="UTF-8">
+                                        <div class="form-group">
+
+                                            <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+
+                                            <input type="password" class="form-control" id="loginPassword" placeholder="Mật Khẩu">
+
+                                            <div class="help-block text-right"><a href="">Quên mật khẩu?</a></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox">Ghi nhớ
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="text-center">
+                                    Chưa có tài khoản? <a href="#"><b>Đăng ký</b></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--End login Form-->
+
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- Bread Crumb -->
+<section class="container">
+    <ol class="breadcrumb">
+        <li><a href="home.html">Trang chủ</a></li>
+        <li class="active">Đăng ký</li>
+    </ol>
+</section>
+
+<section class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Đăng ký</h3>
+        </div>
+        <div class="panel-body">
+            <form action="post" class="form-horizontal">
+
+                <!--ID-->
+
+                <div class="form-group">
+
+                    <label for="signupEmail" class="control-label col-md-2 col-sm-2">Email</label>
+                    <div class="col-md-5 col-sm-5">
+                        <div class="input-group">
+                            <input name="signupEmail" type="email" class="form-control" id="signupEmail" placeholder="Email đồng thời sẽ là tài khoản đăng nhập">
+                            <span class="input-group-btn">
+                                <input type="button" class="btn btn-primary" value="Kiểm Tra">
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!--password-->
+
+                <div class="form-group">
+
+                    <label for="signupPassWord" class="control-label col-md-2 col-sm-2">Mật Khẩu</label>
+                    <div class="col-md-5 col-sm-5">
+                        <input name="signupPassWord" type="password" class="form-control" id="signupPassWord" placeholder="Mật khẩu có trên 8 ký tự, có phân biệt hoa thường">
+                    </div>
+
+
+                </div>
+
+                <!-- Retype pass -->
+
+                <div class="form-group">
+
+                    <label for="confirmPassWord" class="control-label col-md-2 col-sm-2">Mật Khẩu</label>
+                    <div class="col-md-5 col-sm-5">
+                        <input name="confirmPassWord" type="password" class="form-control" id="confirmPassWord" placeholder="Nhập lại mật khẩu chính xác như bên trên">
+                    </div>
+
+
+                </div>
+
+
+
+
+                <!--The selector of Sex-->
+
+                <div class="form-group">
+
+                    <label for="signupSex" class="control-label col-md-2 col-sm-2">Giới tính</label>
+
+                    <div class="col-lg-2 col-md-3 col-sm-3">
+                        <select class="form-control" id="sigupSex">
+                            <option value="nam">Nam</option>
+                            <option value="nữ">Nữ</option>
+                            <option value="khác">Khác</option>
+                        </select>
+                    </div>
+
+                </div>
+
+                <!-- Birth day -->
+                <div class="form-group">
+
+                    <label for="signupBirthDay" class="control-label col-md-2 col-sm-2 col-xs-12">Sinh Nhật</label>
+                    <div class="col-lg-2 col-md-3 col-sm-4">
+
+                            <input name="signupBirthDay" type="date" class="form-control" id="signupBirthDay">
+
+
+                    </div>
+
+                </div>
+                <!--Term and rules-->
+
+                <div class="form-group">
+                    <label for="term" class="control-label col-md-2 col-sm-2">&nbsp;</label>
+                    <div class="col-md-4 col-sm-6">
+                        <input name="term" type="checkbox" class="" id="term"> Đồng ý điều khoản sử dụng
+                    </div>
+                </div>
+
+
+                <!--The Button-->
+
+                <div class="form-group">
+                    <div class="col-md-2 col-sm-2">
+                        &nbsp;
+                    </div>
+
+                    <div class="col-md-10 col-sm-10">
+                        <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-share-alt"></span> Đăng Ký</button>
+                        <button type="reset" class="btn btn-warning"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+                    </div>
+
+                </div>
+            </form>
+
+
+        </div>
+        <div class="panel-footer">
+
+        </div>
+    </div>
+</section>
+
+<!-- Footer -->
+<footer class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">© 2017 - Đỗ Hoàng Product
+
+        </p>
+
+        <a href="https://www.facebook.com/profile.php?id=100005276024152" class="navbar-btn btn-primary btn pull-right" target="_blank">
+            <span class="glyphicon glyphicon-thumbs-up"></span>  Add Friend on FaceBook</a>
+    </div>
+
+</footer>
+
+    <script src="../js/jquery.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/script.js"></script>
+</body>
+</html>

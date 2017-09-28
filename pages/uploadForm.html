@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Video player Assignment</title>
+
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+<nav class="navbar navbar-default bg-faded navbar-fixed-top">
+    <div class="container">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="home.html">MyTube</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="home.html"><span class="glyphicon glyphicon-home"></span> Trang Chủ <span class="sr-only">(current)</span></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Chức Năng <span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li class="active"><a href="uploadForm.html"><span class="glyphicon glyphicon-cloud-upload"></span>    Tải Lên</a></li>
+                        <li><a href="#"><span class="glyphicon glyphicon-cloud-download"></span>   Tải Xuống</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">About</a></li>
+            </ul>
+            <form class="navbar-form navbar-left">
+                <div class="form-group">
+                    <div class="input-group">
+                        <input type="text" class="form-control" placeholder="Tìm Kiếm">
+                        <span class="input-group-btn"><button type="submit" class="btn btn-primary"><span class="glyphicon glyphicon-search"></span></button></span>
+                    </div>
+                </div>
+            </form>
+
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="signup.html"><span class="glyphicon glyphicon-user"></span> Đăng Ký</a></li>
+
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-log-in"></span> Đăng Nhập <span class="caret"></span></a>
+
+                    <!--Login Form-->
+                    <ul class="dropdown-menu" id="loginForm">
+                        <li>
+                            <div class="row">
+                                <div class="col-md-12">
+
+                                    <form class="form" role="form" action="login" accept-charset="UTF-8">
+                                        <div class="form-group">
+
+                                            <input type="email" class="form-control" id="loginEmail" placeholder="Email">
+                                        </div>
+                                        <div class="form-group">
+
+                                            <input type="password" class="form-control" id="loginPassword" placeholder="Mật Khẩu">
+
+                                            <div class="help-block text-right"><a href="">Quên mật khẩu?</a></div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" class="btn btn-primary btn-block">Đăng nhập</button>
+                                        </div>
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox">Ghi nhớ
+                                            </label>
+                                        </div>
+                                    </form>
+                                </div>
+                                <div class="text-center">
+                                    Chưa có tài khoản? <a href="signup.html"><b>Đăng ký</b></a>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                    <!--End login Form-->
+
+                </li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<!-- Bread Crumb -->
+<section class="container">
+    <ol class="breadcrumb">
+        <li><a href="home.html">Trang chủ</a></li>
+        <li class="active">Upload</li>
+    </ol>
+</section>
+
+<section class="container" id="alert">
+
+</section>
+
+<section class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Form Upload Video</h3>
+        </div>
+        <div class="panel-body">
+
+            <div class="row" id="alertVideoID">
+
+            </div>
+
+            <div class="row" id="alertVideoName">
+
+            </div>
+
+            <form action="post" class="form-horizontal">
+
+                <!--ID-->
+
+                <div class="form-group">
+
+                    <label for="videoId" class="control-label col-md-2 col-sm-2">Video ID</label>
+                    <div class="col-md-5 col-sm-5">
+                        <div class="input-group">
+                            <input name="videoId" type="text" class="form-control" id="videoId" placeholder="ID video có 10 ký tự trở lên" onkeyup="isValidVideoID();" onblur="isValidVideoID();" onchange="isValidVideoID();" onkeydown="isValidVideoID();">
+                            <span class="input-group-btn">
+                                <input type="button" class="btn btn-primary" id="checkRequest" value="Kiểm Tra" onclick="checkIdWithYouTube();">
+                            </span>
+
+                        </div>
+                    </div>
+
+
+                </div>
+
+                <!--Name-->
+
+                <div class="form-group">
+
+                    <label for="name" class="control-label col-md-2 col-sm-2">Tên Video</label>
+                    <div class="col-md-5 col-sm-5">
+                        <input name="name" type="text" class="form-control" id="name" placeholder="Tên Video có 3 - 50 ký tự" onkeyup="isValidVideoName();" onblur="isValidVideoName();" onchange="isValidVideoName();" onkeydown="isValidVideoName();">
+                    </div>
+
+
+
+                </div>
+
+                <!--Description-->
+
+                <div class="form-group">
+
+                    <label for="description" class="control-label col-md-2 col-sm-2">Mô Tả</label>
+                    <div class="col-md-8 col-sm-10">
+                        <textarea name="description" class="form-control" id="description" placeholder="" rows="5"></textarea>
+                    </div>
+
+                </div>
+
+                <!--Keywords-->
+
+                <div class="form-group">
+
+                    <label for="keywords" class="control-label col-md-2 col-sm-2">Từ Khóa</label>
+                    <div class="col-md-7 col-sm-8">
+                        <input type="text" name="keywords" class="form-control" id="keywords" placeholder="Từ khóa giúp tìm kiếm Video dễ hơn">
+                    </div>
+
+                </div>
+
+                <!--The Category checkbox-->
+
+                <div class="form-group">
+                    <label class="control-label col-md-2 col-sm-2">Thể Loại</label>
+                    <div class="col-md-10 col-sm-10">
+                        <div class="btn-group">
+                            <label for="description-game" class="btn btn-primary">Game <input type="checkbox" id="description-game" class="badgebox category"><span class="badge">&check;</span></label>
+                            <label for="description-developer" class="btn btn-default">Lập trình <input type="checkbox" id="description-developer" class="badgebox category"><span class="badge">&check;</span></label>
+                            <label for="description-cartoon" class="btn btn-primary">Hoạt hình <input type="checkbox" id="description-cartoon" class="badgebox category"><span class="badge">&check;</span></label>
+                            <label for="description-music" class="btn btn-default">Âm nhạc <input type="checkbox" id="description-music" class="badgebox category"><span class="badge">&check;</span></label>
+                            <label for="description-others" class="btn btn-primary">Khác <input type="checkbox" id="description-others" class="badgebox category"><span class="badge">&check;</span></label>
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <!--The selector of Genre-->
+
+                <div class="form-group">
+
+                    <label for="genre" class="control-label col-md-2 col-sm-2">Genre</label>
+
+                    <div class="col-md-3 col-sm-3">
+                        <select class="form-control" id="genre">
+                            <option value="Phim">Phim</option>
+                            <option value="Âm nhạc">Âm nhạc</option>
+                        </select>
+                    </div>
+
+                </div>
+                <!--Author Name-->
+
+                <div class="form-group">
+                    <label for="authorName" class="control-label col-md-2 col-sm-2">Tác giả</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input name="authorName" type="text" class="form-control" id="authorName">
+                    </div>
+                </div>
+                <!--Athor Email-->
+
+                <div class="form-group">
+                    <label for="authorEmail" class="control-label col-md-2 col-sm-2">Email</label>
+                    <div class="col-md-6 col-sm-6">
+                        <input name="authorEmail" type="email" class="form-control" id="authorEmail" placeholder="Ví dụ: abc@xyz.com">
+                    </div>
+                </div>
+
+                <!--The Button-->
+
+                <div class="form-group">
+                    <div class="col-md-2 col-sm-2">
+                        &nbsp;
+                    </div>
+
+                    <div class="col-md-10 col-sm-10">
+                        <button type="button" class="btn btn-primary" onclick="handleForm();"><span class="glyphicon glyphicon-send"></span> Submit</button>
+                        <button type="reset" class="btn btn-warning" onclick="resetVideoForm();"><span class="glyphicon glyphicon-refresh"></span> Reset</button>
+                    </div>
+
+                </div>
+            </form>
+        </div>
+        <div class="panel-footer">
+            * Gợi ý: Nếu đường link Video là <b>'https://www.youtube.com/watch?v=rtviC6i42bc'</b>, ID video sẽ là <strong>'rtviC6i42bc'</strong>
+        </div>
+    </div>
+</section>
+
+
+
+<!-- Footer -->
+<footer class="navbar navbar-default navbar-fixed-bottom">
+    <div class="container">
+        <p class="navbar-text pull-left">© 2017 - Đỗ Hoàng Product
+
+        </p>
+
+        <a href="https://www.facebook.com/profile.php?id=100005276024152" class="navbar-btn btn-primary btn pull-right" target="_blank">
+            <span class="glyphicon glyphicon-thumbs-up"></span>  Add Friend on FaceBook</a>
+    </div>
+
+</footer>
+
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+<script src="../js/script.js"></script>
+</body>
+</html>
